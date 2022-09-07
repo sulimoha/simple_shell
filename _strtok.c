@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- * _char_cmp - Checks If A Character Match Any Char *
+ * check_delim - Checks If A Character Match Any Char *
  * @c: Character To Check
  * @str: String To Check
  * Return: 1 Succes, 0 Failed
  */
-unsigned int _char_cmp(char c, const char *str)
+unsigned int check_delim(char c, const char *str)
 {
 	unsigned int i;
 
@@ -18,25 +18,25 @@ unsigned int _char_cmp(char c, const char *str)
 }
 
 /**
- * _strtok - extract tokens from strings
- * @str: string
- * @delim: delimiter
- * Return: pointer to the next tokken or null if there are no more tokens
+ * _strtok - Token A String Into Token (strtrok)
+ * @str: String
+ * @delim: Delimiter
+ * Return: Pointer To The Next Token Or NULL
  */
 char *_strtok(char *str, const char *delim)
 {
-	static char *token_str;
+	static char *ts;
 	static char *nt;
 	unsigned int i;
 
 	if (str != NULL)
 		nt = str;
-	token_str = nt;
-	if (token_str == NULL)
+	ts = nt;
+	if (ts == NULL)
 		return (NULL);
-	for (i = 0; token_str[i] != '\0'; i++)
+	for (i = 0; ts[i] != '\0'; i++)
 	{
-		if (_char_cmp(token_str[i], delim) == 0)
+		if (check_delim(ts[i], delim) == 0)
 			break;
 	}
 	if (nt[i] == '\0' || nt[i] == '#')
@@ -44,11 +44,11 @@ char *_strtok(char *str, const char *delim)
 		nt = NULL;
 		return (NULL);
 	}
-	token_str = nt + i;
-	nt = token_str;
+	ts = nt + i;
+	nt = ts;
 	for (i = 0; nt[i] != '\0'; i++)
 	{
-		if (_char_cmp(nt[i], delim) == 1)
+		if (check_delim(nt[i], delim) == 1)
 			break;
 	}
 	if (nt[i] == '\0')
@@ -60,5 +60,5 @@ char *_strtok(char *str, const char *delim)
 		if (*nt == '\0')
 			nt = NULL;
 	}
-	return (token_str);
+	return (ts);
 }

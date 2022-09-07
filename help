@@ -6,7 +6,7 @@ Use `man -k' or `info' to find out more about commands not in this list.
 
 A star (*) next to a name means that the command is disabled.
 
- job_spec [&]                                                    hist [-c] [-d offset] [n] or hist -anrw [filename] or >
+ job_spec [&]                                                    history [-c] [-d offset] [n] or history -anrw [filename] or >
  (( expression ))                                                if COMMANDS; then COMMANDS; [ elif COMMANDS; then COMMANDS; >
  . filename [arguments]                                          jobs [-lnprs] [jobspec ...] or jobs -x command [args]
  :                                                               kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... o>

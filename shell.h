@@ -1,14 +1,17 @@
 #ifndef _SHELL_H_
 #define _SHELL_H_
 
+/**###### environ var ######*/
 
 extern char **environ;
 
+/**##### MACROS ######*/
 
 #define BUFSIZE 1024
 #define DELIM " \t\r\n\a"
-#define writer(c) (write(STDOUT_FILENO, c, _strlen(c)))
+#define PRINTER(c) (write(STDOUT_FILENO, c, _strlen(c)))
 
+/**###### LIBS USED ######*/
 
 #include <stdio.h>
 #include <unistd.h>
@@ -26,9 +29,10 @@ extern char **environ;
 
 
 
+/**###### STRING FUNCTION ######*/
 
 char *_strtok(char *str, const char *tok);
-unsigned int _char_cmp(char c, const char *str);
+unsigned int check_delim(char c, const char *str);
 char *_strncpy(char *dest, char *src, int n);
 int _strlen(char *s);
 int _putchar(char c);
@@ -45,56 +49,61 @@ char *_strchr(char *s, char c);
 int _strncmp(const char *s1, const char *s2, size_t n);
 char *_strdup(char *str);
 
+/**###### MEMORIE  MANGMENT ####*/
 
 void free_env(char **env);
-void *populate_array(void *a, int el, unsigned int len);
+void *fill_an_array(void *a, int el, unsigned int len);
 char *_memcpy(char *dest, char *src, unsigned int n);
 void *_calloc(unsigned int size);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-void free_cmd_line(char **input, char *line);
+void free_all(char **input, char *line);
 
+/**###### INPUT Function ######*/
 
 void prompt(void);
 void signal_to_handel(int sig);
 char *_getline(void);
 
+/** ###### Command parser and extractor ###*/
 
 int path_cmd(char **line);
 char *_getenv(char *name);
-char **parse_input(char *cmd);
+char **parse_cmd(char *cmd);
 int handle_builtin(char **cmd, int er);
 void read_file(char *filename, char **argv);
 char *build(char *token, char *value);
 int check_builtin(char **cmd);
-void creat_env(char **envi);
+void creat_envi(char **envi);
 int check_cmd(char **tokens, char *line, int count, char **argv);
-void parse_file_line(char *line, int counter, FILE *fd, char **argv);
-void _exiter_file_command(char **cmd, char *line, FILE *fd);
+void treat_file(char *line, int counter, FILE *fd, char **argv);
+void exit_bul_for_file(char **cmd, char *line, FILE *fd);
 
+/** ####BUL FUNC #####*/
 
 void hashtag_handle(char *buff);
-int hist(char *input);
-int command_hist(char **cmd, int er);
-int _env(char **cmd, int er);
-int _cd(char **cmd, int er);
-int _help(char **cmd, int er);
-int _echo(char **cmd, int er);
-void  _exiter(char **cmd, char *input, char **argv, int c);
-int normal_echo(char **cmd);
+int history(char *input);
+int history_dis(char **cmd, int er);
+int dis_env(char **cmd, int er);
+int change_dir(char **cmd, int er);
+int display_help(char **cmd, int er);
+int echo_bul(char **cmd, int er);
+void  exit_bul(char **cmd, char *input, char **argv, int c);
+int print_echo(char **cmd);
 
-void unsigned_int_printer(unsigned int n);
-void int_printer(int n);
+/** ####error handle and Printer ####*/
+void print_number(unsigned int n);
+void print_number_in(int n);
 void print_error(char *line, int c, char **argv);
-void _perr(char **argv, int c, char **cmd);
+void _prerror(char **argv, int c, char **cmd);
 
 
 /**
- * struct bulltin_funcs - struct of the builting functions
- * @command:pointer to command
- * @fun: builtin function to execute
+ * struct bulltin - contain bultin to handle and function to excute
+ * @command:pointer to char
+ * @fun:fun to excute when bultin true
  */
 
-typedef struct bulltin_funcs
+typedef struct  bulltin
 {
 	char *command;
 	int (*fun)(char **line, int er);

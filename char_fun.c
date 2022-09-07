@@ -38,9 +38,9 @@ i = 0;
 }
 
 /**
- * _strlen - calculate the length of a string
- * @s: string
- * Return: the length of a string
+ * _strlen - lenght of string
+ * @s:char
+ * Return:int
  */
 
 int _strlen(char *s)
@@ -55,7 +55,7 @@ return (i);
 }
 
 /**
- * _atoi - converts the string argument str to an integer
+ * _atoi - convert to a int
  * @s:string
  * Return:int
  */
@@ -80,8 +80,7 @@ int i, j, n, x;
 	return (n);
 }
 /**
- * _puts - writes a string to stdout up to but not including
- * the null character.
+ * _puts - print a string
  * @str:pointer char
  * return:void
  */
